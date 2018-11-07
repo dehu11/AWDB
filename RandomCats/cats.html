@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Random Cat Generator</title>
+	<title>Random Cat & Dog Generator</title>
 
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link 
@@ -20,16 +20,29 @@
 	<div>
 		<img src=""/>
 	</div>
-	<button id="btn">Get Cat!</button>
-
+	<div>
+		<button id="cat">Get Cat!</button>
+		<button id="dog">Get Dog!</button>
+	</div>
 <script>
 	$(document).ready(getCat);
-	$('#btn').click(getCat);
+	$('#cat').click(getCat);
+	$('#dog').click(getDog);
 
 	function getCat() {
 		$.getJSON("http://aws.random.cat/meow")
 		.done(function(data) {
 			$("img").attr("src", data.file);
+		})
+		.fail(function() {
+			alert("failed");
+		})
+	}
+
+	function getDog() {
+		$.getJSON("https://dog.ceo/api/breeds/image/random")
+		.done(function(data) {
+			$("img").attr("src", data.message);
 		})
 		.fail(function() {
 			alert("failed");
